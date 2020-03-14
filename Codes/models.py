@@ -13,7 +13,8 @@ slim = tf.contrib.slim
 
 
 def generator(inputs, layers, features_root=64, filter_size=3, pool_size=2, output_channel=3):
-    return unet.unet(inputs, layers, features_root, filter_size, pool_size, output_channel)
+   im = unet.unet(inputs, layers, features_root, filter_size, pool_size,output_channel)
+	return unet.unet(im, layers, features_root, filter_size, pool_size,output_channel)
 
 
 def discriminator(inputs, num_filers=(128, 256, 512, 1024, 1024)):
