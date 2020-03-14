@@ -16,7 +16,7 @@ def generator(inputs, layers, features_root=64, filter_size=3, pool_size=2, outp
     return unet.unet(inputs, layers, features_root, filter_size, pool_size, output_channel)
 
 
-def discriminator(inputs, num_filers=(128, 256, 512, 512)):
+def discriminator(inputs, num_filers=(128, 256, 512, 1024, 1024)):
     logits, end_points = pix2pix.pix2pix_discriminator(inputs, num_filers)
     return logits, end_points['predictions']
 
