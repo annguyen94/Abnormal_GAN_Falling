@@ -205,9 +205,10 @@ with tf.Session(config=config) as sess:
             if _step % 100 == 0:
                 summary_writer.add_summary(_summaries, global_step=_step)
                 print('Save summaries...')
-
-            if _step % 1000 == 0:
                 save(saver, sess, snapshot_dir, _step)
+                print('Save checkpoint...')
+            # if _step % 1000 == 0:
+            #     save(saver, sess, snapshot_dir, _step)
 
         except tf.errors.OutOfRangeError:
             print('Finish successfully!')
