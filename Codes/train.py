@@ -44,7 +44,7 @@ with tf.name_scope('dataset'):
     train_videos_clips_tensor.set_shape([batch_size, height, width, 3*(num_his + 1)])
 
     train_inputs = train_videos_clips_tensor[..., 0:num_his*3]
-    train_gt = train_videos_clips_tensor[..., -3:]
+    train_gt = train_videos_clips_tensor[..., -5:]
 
     print('train inputs = {}'.format(train_inputs))
     print('train prediction gt = {}'.format(train_gt))
@@ -56,7 +56,7 @@ with tf.name_scope('dataset'):
     test_videos_clips_tensor.set_shape([batch_size, height, width, 3*(num_his + 1)])
 
     test_inputs = test_videos_clips_tensor[..., 0:num_his*3]
-    test_gt = test_videos_clips_tensor[..., -3:]
+    test_gt = test_videos_clips_tensor[..., -5:]
 
     print('test inputs = {}'.format(test_inputs))
     print('test prediction gt = {}'.format(test_gt))
@@ -90,9 +90,9 @@ else:
 
 # define flow loss
 if lam_flow != 0:
-    train_gt_flow = flownet(input_a=train_inputs[..., -3:], input_b=train_gt,
+    train_gt_flow = flownet(input_a=train_inputs[..., -5:], input_b=train_gt,
                             height=flow_height, width=flow_width, reuse=None)
-    train_pred_flow = flownet(input_a=train_inputs[..., -3:], input_b=train_outputs,
+    train_pred_flow = flownet(input_a=train_inputs[..., -5:], input_b=train_outputs,
                               height=flow_height, width=flow_width, reuse=True)
     flow_loss = tf.reduce_mean(tf.abs(train_gt_flow - train_pred_flow))
 else:
