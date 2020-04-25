@@ -31,9 +31,9 @@ print(const)
 
 # define dataset
 with tf.name_scope('dataset'):
-    test_video_clips_tensor = tf.placeholder(shape=[1, height, width, 3 * (num_his + 1)],
+    test_video_clips_tensor = tf.placeholder(shape=[1, height, width, 5 * (num_his + 1)],
                                              dtype=tf.float32)
-    test_inputs = test_video_clips_tensor[..., 0:num_his*3]
+    test_inputs = test_video_clips_tensor[..., 0:num_his*5]
     test_gt = test_video_clips_tensor[..., -5:]
     print('test inputs = {}'.format(test_inputs))
     print('test prediction gt = {}'.format(test_gt))
