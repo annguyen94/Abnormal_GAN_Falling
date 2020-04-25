@@ -20,7 +20,7 @@ dataset_name = const.DATASET
 test_folder = const.TEST_FOLDER
 
 num_his = const.NUM_HIS
-height, width = 256, 256
+height, width = 64, 64
 
 snapshot_dir = const.SNAPSHOT_DIR
 psnr_dir = const.PSNR_DIR
@@ -34,7 +34,7 @@ with tf.name_scope('dataset'):
     test_video_clips_tensor = tf.placeholder(shape=[1, height, width, 3 * (num_his + 1)],
                                              dtype=tf.float32)
     test_inputs = test_video_clips_tensor[..., 0:num_his*3]
-    test_gt = test_video_clips_tensor[..., -3:]
+    test_gt = test_video_clips_tensor[..., -5:]
     print('test inputs = {}'.format(test_inputs))
     print('test prediction gt = {}'.format(test_gt))
 
@@ -42,7 +42,7 @@ with tf.name_scope('dataset'):
 # in testing, only generator networks, there is no discriminator networks and flownet.
 with tf.variable_scope('generator', reuse=None):
     print('testing = {}'.format(tf.get_variable_scope().name))
-    test_outputs = generator(test_inputs, layers=4, output_channel=3)
+    test_outputs = generator(test_inputs, layers=3, output_channel=3)
     test_psnr_error = psnr_error(gen_frames=test_outputs, gt_frames=test_gt)
 
 
