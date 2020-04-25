@@ -41,7 +41,7 @@ with tf.name_scope('dataset'):
 
     train_it = train_dataset.make_one_shot_iterator()
     train_videos_clips_tensor = train_it.get_next()
-    train_videos_clips_tensor.set_shape([batch_size, height, width, 5*(num_his + 1)])
+    train_videos_clips_tensor.set_shape([batch_size, height, width, 4*(num_his + 1)])
 
     train_inputs = train_videos_clips_tensor[..., 0:num_his*5]
     train_gt = train_videos_clips_tensor[..., -5:]
@@ -53,7 +53,7 @@ with tf.name_scope('dataset'):
     test_dataset = test_loader(batch_size=batch_size, time_steps=num_his, num_pred=1)
     test_it = test_dataset.make_one_shot_iterator()
     test_videos_clips_tensor = test_it.get_next()
-    test_videos_clips_tensor.set_shape([batch_size, height, width, 5*(num_his + 1)])
+    test_videos_clips_tensor.set_shape([batch_size, height, width, 4*(num_his + 1)])
 
     test_inputs = test_videos_clips_tensor[..., 0:num_his*5]
     test_gt = test_videos_clips_tensor[..., -5:]
