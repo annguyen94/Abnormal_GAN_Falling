@@ -90,8 +90,8 @@ const.ITERATIONS = args.iters
 const.EVALUATE = args.evaluate
 
 # network constants
-const.HEIGHT = 256
-const.WIDTH = 256
+const.HEIGHT = 64
+const.WIDTH = 64
 const.FLOWNET_CHECKPOINT = 'checkpoints/pretrains/flownet-SD.ckpt-0'
 const.FLOW_HEIGHT = 384
 const.FLOW_WIDTH = 512
