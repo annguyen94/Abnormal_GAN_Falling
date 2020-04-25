@@ -41,9 +41,9 @@ with tf.name_scope('dataset'):
 
     train_it = train_dataset.make_one_shot_iterator()
     train_videos_clips_tensor = train_it.get_next()
-    train_videos_clips_tensor.set_shape([batch_size, height, width, 3*(num_his + 1)])
+    train_videos_clips_tensor.set_shape([batch_size, height, width, 5*(num_his + 1)])
 
-    train_inputs = train_videos_clips_tensor[..., 0:num_his*3]
+    train_inputs = train_videos_clips_tensor[..., 0:num_his*5]
     train_gt = train_videos_clips_tensor[..., -5:]
 
     print('train inputs = {}'.format(train_inputs))
@@ -53,9 +53,9 @@ with tf.name_scope('dataset'):
     test_dataset = test_loader(batch_size=batch_size, time_steps=num_his, num_pred=1)
     test_it = test_dataset.make_one_shot_iterator()
     test_videos_clips_tensor = test_it.get_next()
-    test_videos_clips_tensor.set_shape([batch_size, height, width, 3*(num_his + 1)])
+    test_videos_clips_tensor.set_shape([batch_size, height, width, 5*(num_his + 1)])
 
-    test_inputs = test_videos_clips_tensor[..., 0:num_his*3]
+    test_inputs = test_videos_clips_tensor[..., 0:num_his*5]
     test_gt = test_videos_clips_tensor[..., -5:]
 
     print('test inputs = {}'.format(test_inputs))
@@ -202,7 +202,7 @@ with tf.Session(config=config) as sess:
                 print('                 adversarial Loss : ({:.4f} * {:.4f} = {:.4f})'.format(_adv_loss, lam_adv, _adv_loss * lam_adv))
                 print('                 flownet     Loss : ({:.4f} * {:.4f} = {:.4f})'.format(_flow_loss, lam_flow, _flow_loss * lam_flow))
                 print('                 PSNR  Error      : ', _train_psnr)
-            if _step % 100 == 0:
+            if _step % 500 == 0:
                 summary_writer.add_summary(_summaries, global_step=_step)
                 print('Save summaries...')
                 save(saver, sess, snapshot_dir, _step)
