@@ -78,14 +78,14 @@ with tf.variable_scope('generator', reuse=True):
 if lam_lp != 0:
     lp_loss = intensity_loss(gen_frames=train_outputs, gt_frames=train_gt, l_num=l_num)
 else:
-    lp_loss = tf.constant(0.0, dtype=tf.float32)
+    lp_loss = tf.constant(0.0, dtype=tf.float64)
 
 
 # define gdl loss
 if lam_gdl != 0:
     gdl_loss = gradient_loss(gen_frames=train_outputs, gt_frames=train_gt, alpha=alpha_num)
 else:
-    gdl_loss = tf.constant(0.0, dtype=tf.float32)
+    gdl_loss = tf.constant(0.0, dtype=tf.float64)
 
 
 # define flow loss
@@ -96,7 +96,7 @@ if lam_flow != 0:
                               height=flow_height, width=flow_width, reuse=True)
     flow_loss = tf.reduce_mean(tf.abs(train_gt_flow - train_pred_flow))
 else:
-    flow_loss = tf.constant(0.0, dtype=tf.float32)
+    flow_loss = tf.constant(0.0, dtype=tf.float64)
 
 
 # define adversarial loss
@@ -112,8 +112,8 @@ if adversarial:
     adv_loss = tf.reduce_mean(tf.square(fake_outputs - 1) / 2)
     dis_loss = tf.reduce_mean(tf.square(real_outputs - 1) / 2) + tf.reduce_mean(tf.square(fake_outputs) / 2)
 else:
-    adv_loss = tf.constant(0.0, dtype=tf.float32)
-    dis_loss = tf.constant(0.0, dtype=tf.float32)
+    adv_loss = tf.constant(0.0, dtype=tf.float64)
+    dis_loss = tf.constant(0.0, dtype=tf.float64)
 
 
 with tf.name_scope('training'):
