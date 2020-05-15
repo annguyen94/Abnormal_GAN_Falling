@@ -64,13 +64,13 @@ with tf.name_scope('dataset'):
 # define training generator function
 with tf.variable_scope('generator', reuse=None):
     print('training = {}'.format(tf.get_variable_scope().name))
-    train_outputs = generator(train_inputs, layers=3, output_channel=3)
+    train_outputs = generator(train_inputs, layers=6, output_channel=3)
     train_psnr_error = psnr_error(gen_frames=train_outputs, gt_frames=train_gt)
 
 # define testing generator function
 with tf.variable_scope('generator', reuse=True):
     print('testing = {}'.format(tf.get_variable_scope().name))
-    test_outputs = generator(test_inputs, layers=3, output_channel=3)
+    test_outputs = generator(test_inputs, layers=6, output_channel=3)
     test_psnr_error = psnr_error(gen_frames=test_outputs, gt_frames=test_gt)
 
 
