@@ -78,25 +78,25 @@ with tf.variable_scope('generator', reuse=True):
 if lam_lp != 0:
     lp_loss = intensity_loss(gen_frames=train_outputs, gt_frames=train_gt, l_num=l_num)
 else:
-    lp_loss = tf.constant(0.0, dtype=tf.float64)
+    lp_loss = tf.constant(0.0, dtype=tf.float32)
 
 
 # define gdl loss
 if lam_gdl != 0:
     gdl_loss = gradient_loss(gen_frames=train_outputs, gt_frames=train_gt, alpha=alpha_num)
 else:
-    gdl_loss = tf.constant(0.0, dtype=tf.float64)
+    gdl_loss = tf.constant(0.0, dtype=tf.float32)
 
 
 # define flow loss
 if lam_flow != 0:
-    train_gt_flow = flownet(input_a=train_inputs[..., -5:], input_b=train_gt,
+    train_gt_flow = flownet(input_a=train_inputs[..., -3:], input_b=train_gt,
                             height=flow_height, width=flow_width, reuse=None)
-    train_pred_flow = flownet(input_a=train_inputs[..., -5:], input_b=train_outputs,
+    train_pred_flow = flownet(input_a=train_inputs[..., -3:], input_b=train_outputs,
                               height=flow_height, width=flow_width, reuse=True)
     flow_loss = tf.reduce_mean(tf.abs(train_gt_flow - train_pred_flow))
 else:
-    flow_loss = tf.constant(0.0, dtype=tf.float64)
+    flow_loss = tf.constant(0.0, dtype=tf.float32)
 
 
 # define adversarial loss
@@ -112,8 +112,8 @@ if adversarial:
     adv_loss = tf.reduce_mean(tf.square(fake_outputs - 1) / 2)
     dis_loss = tf.reduce_mean(tf.square(real_outputs - 1) / 2) + tf.reduce_mean(tf.square(fake_outputs) / 2)
 else:
-    adv_loss = tf.constant(0.0, dtype=tf.float64)
-    dis_loss = tf.constant(0.0, dtype=tf.float64)
+    adv_loss = tf.constant(0.0, dtype=tf.float32)
+    dis_loss = tf.constant(0.0, dtype=tf.float32)
 
 
 with tf.name_scope('training'):
@@ -202,9 +202,10 @@ with tf.Session(config=config) as sess:
                 print('                 adversarial Loss : ({:.4f} * {:.4f} = {:.4f})'.format(_adv_loss, lam_adv, _adv_loss * lam_adv))
                 print('                 flownet     Loss : ({:.4f} * {:.4f} = {:.4f})'.format(_flow_loss, lam_flow, _flow_loss * lam_flow))
                 print('                 PSNR  Error      : ', _train_psnr)
-            if _step % 500 == 0:
+             if _step % 100 == 0:
                 summary_writer.add_summary(_summaries, global_step=_step)
                 print('Save summaries...')
+            if _step % 1000 == 0:
                 save(saver, sess, snapshot_dir, _step)
                 print('Save checkpoint...')
             # if _step % 1000 == 0:
