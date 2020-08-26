@@ -122,7 +122,7 @@ const.LRATE_D = eval(config.get(const.DATASET, 'LRATE_D'))
 const.LRATE_D_BOUNDARIES = eval(config.get(const.DATASET, 'LRATE_D_BOUNDARIES'))
 
 
-const.SAVE_DIR = 
+const.SAVE_DIR = 'content/drive/My Drive/Saver UR Falling 2 Frame'
 #'{dataset}_l_{L_NUM}_alpha_{ALPHA_NUM}_lp_{LAM_LP}_' \
 #                 'adv_{LAM_ADV}_gdl_{LAM_GDL}_flow_{LAM_FLOW}'.format(dataset=const.DATASET,
 #                                                                      L_NUM=const.L_NUM,
