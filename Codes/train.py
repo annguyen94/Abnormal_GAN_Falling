@@ -6,17 +6,6 @@ from loss_functions import intensity_loss, gradient_loss
 from utils import DataLoader, load, save, psnr_error
 from constant import const
 
-AUTO = tf.data.experimental.AUTOTUNE
-
-# Create strategy from tpu
-tpu = tf.distribute.cluster_resolver.TPUClusterResolver()
-tf.config.experimental_connect_to_cluster(tpu)
-tf.tpu.experimental.initialize_tpu_system(tpu)
-strategy = tf.distribute.experimental.TPUStrategy(tpu)
-
-
-
-
 os.environ['CUDA_DEVICES_ORDER'] = "PCI_BUS_ID"
 os.environ['CUDA_VISIBLE_DEVICES'] = const.GPU
 
@@ -24,8 +13,8 @@ dataset_name = const.DATASET
 train_folder = const.TRAIN_FOLDER
 test_folder = const.TEST_FOLDER
 
-batch_size = 16 * strategy.num_replicas_in_sync
-#batch_size = const.BATCH_SIZE
+
+batch_size = const.BATCH_SIZE
 iterations = const.ITERATIONS
 num_his = const.NUM_HIS
 height, width = 256, 256
