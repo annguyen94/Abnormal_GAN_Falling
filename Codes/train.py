@@ -28,7 +28,7 @@ batch_size = 16 * strategy.num_replicas_in_sync
 #batch_size = const.BATCH_SIZE
 iterations = const.ITERATIONS
 num_his = const.NUM_HIS
-height, width = 64, 64
+height, width = 256, 256
 flow_height, flow_width = const.FLOW_HEIGHT, const.FLOW_WIDTH
 
 l_num = const.L_NUM
@@ -225,7 +225,7 @@ with tf.Session(config=config) as sess:
                 summary_writer.add_summary(_summaries, global_step=_step)
                 print('Save summaries...')
 
-            if _step % 1000 == 0:
+            if _step % 200 == 0:
                 save(saver, sess, snapshot_dir, _step)
 
         except tf.errors.OutOfRangeError:

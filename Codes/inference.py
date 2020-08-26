@@ -20,7 +20,7 @@ dataset_name = const.DATASET
 test_folder = const.TEST_FOLDER
 
 num_his = const.NUM_HIS
-height, width = 64, 64
+height, width = 256, 256
 
 snapshot_dir = const.SNAPSHOT_DIR
 psnr_dir = const.PSNR_DIR
