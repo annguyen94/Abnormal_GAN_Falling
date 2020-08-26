@@ -70,11 +70,13 @@ class GroundTruthLoader(object):
     SHANGHAITECH_LABEL_PATH = os.path.join(DATA_DIR, 'shanghaitech/testing/test_frame_mask')
     TOY_DATA = 'toydata'
     TOY_DATA_LABEL_PATH = os.path.join(DATA_DIR, TOY_DATA, 'toydata.json')
+    FALLING2FRAME = 'falling2frame'
 
     NAME_MAT_MAPPING = {
         AVENUE: os.path.join(DATA_DIR, 'avenue/avenue.mat'),
         PED1: os.path.join(DATA_DIR, 'ped1/ped1.mat'),
         PED2: os.path.join(DATA_DIR, 'ped2/ped2.mat'),
+        FALLING2FRAME: os.path.join(DATA_DIR, 'Falling2Frame/falling2frame.mat'),
         ENTRANCE: os.path.join(DATA_DIR, 'enter/enter.mat'),
         EXIT: os.path.join(DATA_DIR, 'exit/exit.mat')
     }
@@ -83,6 +85,7 @@ class GroundTruthLoader(object):
         AVENUE: os.path.join(DATA_DIR, 'avenue/testing/frames'),
         PED1: os.path.join(DATA_DIR, 'ped1/testing/frames'),
         PED2: os.path.join(DATA_DIR, 'ped2/testing/frames'),
+        FALLING2FRAME: os.path.join(DATA_DIR, 'Falling2Frame/testing/frames'),
         ENTRANCE: os.path.join(DATA_DIR, 'enter/testing/frames'),
         EXIT: os.path.join(DATA_DIR, 'exit/testing/frames')
     }
