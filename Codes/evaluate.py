@@ -71,12 +71,14 @@ class GroundTruthLoader(object):
     TOY_DATA = 'toydata'
     TOY_DATA_LABEL_PATH = os.path.join(DATA_DIR, TOY_DATA, 'toydata.json')
     FALLING2FRAME = 'falling2frame'
+    FALLING = 'falling2frame'
 
     NAME_MAT_MAPPING = {
         AVENUE: os.path.join(DATA_DIR, 'avenue/avenue.mat'),
         PED1: os.path.join(DATA_DIR, 'ped1/ped1.mat'),
         PED2: os.path.join(DATA_DIR, 'ped2/ped2.mat'),
         FALLING2FRAME: os.path.join(DATA_DIR, 'Falling2Frame/falling2frame.mat'),
+        FALLING: os.path.join(DATA_DIR, 'Falling/falling.mat'),
         ENTRANCE: os.path.join(DATA_DIR, 'enter/enter.mat'),
         EXIT: os.path.join(DATA_DIR, 'exit/exit.mat')
     }
@@ -86,6 +88,7 @@ class GroundTruthLoader(object):
         PED1: os.path.join(DATA_DIR, 'ped1/testing/frames'),
         PED2: os.path.join(DATA_DIR, 'ped2/testing/frames'),
         FALLING2FRAME: os.path.join(DATA_DIR, 'Falling2Frame/testing/frames'),
+        FALLING: os.path.join(DATA_DIR, 'Falling/testing/frames'),
         ENTRANCE: os.path.join(DATA_DIR, 'enter/testing/frames'),
         EXIT: os.path.join(DATA_DIR, 'exit/testing/frames')
     }
