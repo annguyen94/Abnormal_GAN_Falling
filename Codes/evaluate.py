@@ -71,7 +71,7 @@ class GroundTruthLoader(object):
     TOY_DATA = 'toydata'
     TOY_DATA_LABEL_PATH = os.path.join(DATA_DIR, TOY_DATA, 'toydata.json')
     FALLING2FRAME = 'falling2frame'
-    FALLING = 'falling2frame'
+    FALLING = 'falling'
 
     NAME_MAT_MAPPING = {
         AVENUE: os.path.join(DATA_DIR, 'avenue/avenue.mat'),
