@@ -19,18 +19,12 @@ def np_load_frame(filename, resize_height, resize_width):
     :param resize_width: resized width
     :return: numpy.ndarray
     """
-    if(int(fileName[0:3]) == int(0)): 
-        image_decoded = cv2.imread(filename)
-        image_resized = cv2.resize(image_decoded, (resize_width, resize_height))
-        image_resized = image_resized.astype(dtype=np.float32)
-        image_resized = (image_resized / 127.5) - 1.0
-        return image_resized
-    if(int(fileName[0:3]) % int(2) == int(0)):
-        image_decoded = cv2.imread(filename)
-        image_resized = cv2.resize(image_decoded, (resize_width, resize_height))
-        image_resized = image_resized.astype(dtype=np.float32)
-        image_resized = (image_resized / 127.5) - 1.0
-        return image_resized
+ 
+    image_decoded = cv2.imread(filename)
+    image_resized = cv2.resize(image_decoded, (resize_width, resize_height))
+    image_resized = image_resized.astype(dtype=np.float32)
+    image_resized = (image_resized / 127.5) - 1.0
+    return image_resized
 
 
 class DataLoader(object):
