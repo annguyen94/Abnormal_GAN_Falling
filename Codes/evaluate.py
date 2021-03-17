@@ -77,8 +77,8 @@ class GroundTruthLoader(object):
         AVENUE: os.path.join(DATA_DIR, 'avenue/avenue.mat'),
         PED1: os.path.join(DATA_DIR, 'ped1/ped1.mat'),
         PED2: os.path.join(DATA_DIR, 'ped2/ped2.mat'),
-        FALLING2FRAME: os.path.join(DATA_DIR, 'Falling2Frame/falling2frame.mat'),
-        FALLING: os.path.join(DATA_DIR, 'Falling/falling.mat'),
+        FALLING2FRAME: os.path.join(DATA_DIR, 'falling2frame/falling2frame.mat'),
+        FALLING: os.path.join(DATA_DIR, 'falling/falling.mat'),
         ENTRANCE: os.path.join(DATA_DIR, 'enter/enter.mat'),
         EXIT: os.path.join(DATA_DIR, 'exit/exit.mat')
     }
@@ -87,8 +87,8 @@ class GroundTruthLoader(object):
         AVENUE: os.path.join(DATA_DIR, 'avenue/testing/frames'),
         PED1: os.path.join(DATA_DIR, 'ped1/testing/frames'),
         PED2: os.path.join(DATA_DIR, 'ped2/testing/frames'),
-        FALLING2FRAME: os.path.join(DATA_DIR, 'Falling2Frame/testing/frames'),
-        FALLING: os.path.join(DATA_DIR, 'Falling/testing/frames'),
+        FALLING2FRAME: os.path.join(DATA_DIR, 'falling2frame/testing/frames'),
+        FALLING: os.path.join(DATA_DIR, 'falling/testing/frames'),
         ENTRANCE: os.path.join(DATA_DIR, 'enter/testing/frames'),
         EXIT: os.path.join(DATA_DIR, 'exit/testing/frames')
     }
