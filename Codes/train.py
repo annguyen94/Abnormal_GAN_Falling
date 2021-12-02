@@ -193,7 +193,7 @@ with tf.Session(config=config) as sess:
             _, _g_lr, _step, _lp_loss, _gdl_loss, _adv_loss, _flow_loss, _g_loss, _train_psnr, _summaries = sess.run(
                 [g_train_op, g_lrate, g_step, lp_loss, gdl_loss, adv_loss, flow_loss, g_loss, train_psnr_error, summary_op])
 
-            if _step % 50 == 0:
+            if _step % 10 == 0:
                 print('DiscriminatorModel: Step {} | Global Loss: {:.6f}, lr = {:.6f}'.format(_d_step, _dis_loss, _d_lr))
                 print('GeneratorModel : Step {}, lr = {:.6f}'.format(_step, _g_lr))
                 print('                 Global      Loss : ', _g_loss)
@@ -202,11 +202,11 @@ with tf.Session(config=config) as sess:
                 print('                 adversarial Loss : ({:.4f} * {:.4f} = {:.4f})'.format(_adv_loss, lam_adv, _adv_loss * lam_adv))
                 print('                 flownet     Loss : ({:.4f} * {:.4f} = {:.4f})'.format(_flow_loss, lam_flow, _flow_loss * lam_flow))
                 print('                 PSNR  Error      : ', _train_psnr)
-            if _step % 1000 == 0:
+            if _step % 100 == 0:
                 summary_writer.add_summary(_summaries, global_step=_step)
                 print('Save summaries...')
 
-            if _step % 5000 == 0:
+            if _step % 1000 == 0:
                 save(saver, sess, snapshot_dir, _step)
 
         except tf.errors.OutOfRangeError:
