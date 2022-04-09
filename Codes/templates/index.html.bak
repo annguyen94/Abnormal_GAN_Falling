@@ -48,7 +48,7 @@
       font-size: 30px;
       text-shadow: 0 0 3px #00f, 0 0 5px #f00;
     }
-    #hero-image {
+    #my-image {
       background-image: url("static/asset/index-image.jpg");
       background-color: #cccccc;
       height: 800px;
@@ -58,10 +58,10 @@
       position: relative;
       opacity: 1;
     }
-    .hero-text {
+    .my-text {
       text-align: center;
       position: absolute;
-      top: 50%;
+      top: 40%;
       left: 50%;
       transform: translate(-50%, -50%);
       color: white;
@@ -101,33 +101,32 @@
 </head>
 
 <body>
-<div id="hero-image">
+<div id="my-image">
 
-    <div class="hero-text">
-        <h1 style="font-size:50px">Future Frame Prediction for Anomaly Detection</h1>
+    <div class="my-text">
+        <h1 style="font-size:50px">Abnormal Detection In Human Behavior Using Generative Adversarial Network</h1>
 
         <form method ='post' enctype=multipart/form-data class='form'>
 
             <div class='all'>
                 <div class="inp-pretrain">
-                    <h3> Choose pre-train model </h3>
+                    <h3> Model được sử dụng </h3>
                     <input type="radio" name="pretrain_options" id="ped1" value="ped1"> Ped1 </input><br>
                     <input type="radio" name="pretrain_options" id="ped2" value="ped2"> Ped2 </input><br>
-                    <input type="radio" name="pretrain_options" id="avenue" value="avenue" checked> Avenue </input><br>
-                    <input type="radio" name="pretrain_options" id="shanghai" value="shanghaitech"> ShanghaiTech </input><br>
+                    <input type="radio" name="pretrain_options" id="avenue" value="avenue" > Avenue </input><br>
+                    <input type="radio" name="pretrain_options" id="falling" value="falling" checked> Falling </input><br>
                 </div>
 
                 <div class="inp-data">
-                    <h3> Input a list of frames </h3>
+                    <h3> Danh sách khung hình thực nghiệm </h3>
                     <input type="file" name="file[]" multiple="">
-                    <h3> or use available dataset </h3>
+                    <h3> hoặc thực nghiệm trên bộ dữ liệu chuẩn  </h3>
                     <select name="data_options">
-                        <option value="" selected disabled> --choose data-- </option>
+                        <option value="" selected disabled> --chọn bộ dữ liệu-- </option>
                         <option value="ped1"> Ped1 </option>
                         <option value="ped2"> Ped2 </option>
                         <option value="avenue"> Avenue </option>
-                        <option value="shanghaitech"> ShanghaiTech </option>
-                        <option value="uit"> UIT </option>
+                        <option value="falling"> Falling </option>
                     </select>
                 </div>
             </div>
