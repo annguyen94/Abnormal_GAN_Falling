@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Ano Detection - Result video</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="static/asset/icon.jpg">
+  <link rel="shortcut icon" type="image/x-icon" href="static/asset/bowsett.ico">
   <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800" rel="stylesheet">
   <style>
     body {

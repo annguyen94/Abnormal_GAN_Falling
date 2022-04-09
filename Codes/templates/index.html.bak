@@ -114,7 +114,7 @@
                     <input type="radio" name="pretrain_options" id="ped1" value="ped1"> Ped1 </input><br>
                     <input type="radio" name="pretrain_options" id="ped2" value="ped2"> Ped2 </input><br>
                     <input type="radio" name="pretrain_options" id="avenue" value="avenue" checked> Avenue </input><br>
-                    <input type="radio" name="pretrain_options" id="falling" value="falling"> Falling </input><br>
+                    <input type="radio" name="pretrain_options" id="shanghai" value="shanghaitech"> ShanghaiTech </input><br>
                 </div>
 
                 <div class="inp-data">
@@ -126,8 +126,8 @@
                         <option value="ped1"> Ped1 </option>
                         <option value="ped2"> Ped2 </option>
                         <option value="avenue"> Avenue </option>
-                        <option value="falling"> Falling </option>
-                     
+                        <option value="shanghaitech"> ShanghaiTech </option>
+                        <option value="uit"> UIT </option>
                     </select>
                 </div>
             </div>
