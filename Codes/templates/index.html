@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Ano Detection</title>
+  <title>Abnormal Detection with GAN</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="static/asset/icon.jpg">
   <link href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600,700,800" rel="stylesheet">
@@ -12,10 +12,12 @@
       font-family: Arial, Helvetica, sans-serif;
     }
     #loading {
+      background-color: #000000;
       display: none;
       cursor: wait;
     }
     .loadding-screen {
+     
       position: fixed;
       top: 0;
       left: 0;
@@ -33,7 +35,7 @@
       top: 20%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: #4c4cff;
+      color: #0C5682;
       font-weight: 800;
       font-size: 40px;
     }
@@ -43,10 +45,10 @@
       top: 80%;
       right: 0;
       transform: translate(-50%, -50%);
-      color: #0c0c0c;
+      color: #0C5682;
       font-weight: 500;
       font-size: 30px;
-      text-shadow: 0 0 3px #00f, 0 0 5px #f00;
+      
     }
     #my-image {
       background-image: url("static/asset/index-image.jpg");
@@ -104,7 +106,7 @@
 <div id="my-image">
 
     <div class="my-text">
-        <h1 style="font-size:50px">Abnormal Detection In Human Behavior Using Generative Adversarial Network</h1>
+        <h1 style="font-size:40px">Abnormal Detection In Human Behavior Using Generative Adversarial Network</h1>
 
         <form method ='post' enctype=multipart/form-data class='form'>
 
@@ -150,7 +152,7 @@
         function myFunction()
         {
             document.getElementById("loading").style.display = "block";
-            document.getElementById("hero-image").style.opacity = 0.3;
+            document.getElementById("my-image").style.opacity = 0.3;
         }
 </script>
 </body>
