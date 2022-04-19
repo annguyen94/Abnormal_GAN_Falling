@@ -4,6 +4,7 @@ import time
 import numpy as np
 import pickle
 import cv2
+import shutil
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 
@@ -170,12 +171,12 @@ with tf.Session(config=config) as sess:
         print('total time = {}, fps = {}'.format(used_time, total / used_time))
        
         inp_path = test_folder
-        out_path = './frames/'
+        out_path = 'frames/'
         
         it = 0
         testPredict = np.zeros(scores.shape, dtype=int)
         thres = 0.6
-        
+       
         for video_name, video in videos_info.items():
             
             length = video['length']
@@ -183,7 +184,13 @@ with tf.Session(config=config) as sess:
             
             #save_npy_file = 'npy/' + video_name + '.npy'
             dat = np.zeros(length)
-            
+            dir_output = os.path.join(out_path, new_video_name)
+            if not os.path.exists(dir_output):
+              os.mkdir(dir_output)
+            else:
+              shutil.rmtree(dir_output)
+              os.mkdir(dir_output)
+
             frames_list = os.listdir(inp_path + '/' + new_video_name)
             frames_list.sort()
             for i in range(num_his, length):
@@ -196,12 +203,14 @@ with tf.Session(config=config) as sess:
                     video_name, num_videos, i, length, scores[it], 'Abnorm'if k==1 else 'Normal' , k))
                 
                 dat[i] = scores[it]
+               
                 
+                  
                 # Make output video
                 img_path = inp_path + '/' + new_video_name + '/' + frames_list[i]
                 print("new_video_name", new_video_name)
                 print ("img path:", img_path)
-                frame_out = '/content/drive/MyDrive/SaverURFalling2Frame/frames/' + str(i) + '.jpg'
+                frame_out = out_path + new_video_name + "/" + '{:06}'.format(i) + ".jpg"
                 print ("frames out:", frame_out)
                 frame = cv2.imread(img_path)
                 H, W = frame.shape[:2]
@@ -289,7 +298,7 @@ with tf.Session(config=config) as sess:
         #end TODO
        
         inp_path = test_folder
-        out_path = './frames/'
+        out_path = 'frames/'
         
         it = 0
         testPredict = np.zeros(scores.shape, dtype=int)
@@ -310,7 +319,12 @@ with tf.Session(config=config) as sess:
             
             #save_npy_file = 'npy/' + new_video_name + '.npy'
             dat = np.zeros(length)
-            
+            dir_output = os.path.join(out_path, new_video_name)
+            if not os.path.exists(dir_output):
+              os.mkdir(dir_output)
+            else:
+              shutil.rmtree(dir_output)
+              os.mkdir(dir_output)
 
             frames_list = os.listdir(inp_path + '/' + new_video_name)
             frames_list.sort()
@@ -327,7 +341,7 @@ with tf.Session(config=config) as sess:
                 # Make output video
                 img_path = inp_path + '/' + new_video_name + '/' + frames_list[i]
                 #print ("img path:", img_path)
-                frame_out = "/content/drive/MyDrive/SaverURFalling2Frame/frames/" + str(i) + ".jpg"
+                frame_out = out_path + new_video_name + "/" +'{:06}'.format(i) + ".jpg"
                 print ("frames out:", frame_out)
                 frame = cv2.imread(img_path)
                 H, W = frame.shape[:2]
@@ -365,4 +379,4 @@ with tf.Session(config=config) as sess:
     if dataset_name=='upload':
         inference_func(snapshot_dir, dataset_name, evaluate_name)
     else:
-        label_inference_func(snapshot_dir, dataset_name, evaluate_name)
+       label_inference_func(snapshot_dir, dataset_name, evaluate_name)

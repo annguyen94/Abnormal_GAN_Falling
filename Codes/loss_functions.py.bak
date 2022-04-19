@@ -19,11 +19,6 @@ def intensity_loss(gen_frames, gt_frames, l_num):
     """
     return tf.reduce_mean(tf.abs((gen_frames - gt_frames) ** l_num))
 
-def diff_loss(gen_frames, gt_frames, prev_frames,prev_gen, dif_num):
-    diff_gt = tf.abs(gt_frames - prev_frames)
-    diff_gen = tf.abs(gen_frames - prev_gen)
-    return tf.reduce_mean(tf.abs((diff_gt - diff_gen) ** dif_num))
-
 
 def gradient_loss(gen_frames, gt_frames, alpha):
     """

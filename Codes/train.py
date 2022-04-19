@@ -44,6 +44,9 @@ with tf.name_scope('dataset'):
     train_videos_clips_tensor.set_shape([batch_size, height, width, 3*(num_his + 1)])
 
     train_inputs = train_videos_clips_tensor[..., 0:num_his*3]
+    train_inputs = tf.reshape(train_inputs,[batch_size,height,width,num_his,3])
+    train_inputs = train_inputs[:,:,:,::2,:]
+    train_inputs = tf.reshape(train_inputs,[batch_size,height,width,-1])
     train_gt = train_videos_clips_tensor[..., -3:]
 
     print('train inputs = {}'.format(train_inputs))
@@ -56,6 +59,9 @@ with tf.name_scope('dataset'):
     test_videos_clips_tensor.set_shape([batch_size, height, width, 3*(num_his + 1)])
 
     test_inputs = test_videos_clips_tensor[..., 0:num_his*3]
+    test_inputs = tf.reshape(test_inputs,[batch_size,height,width,num_his,3])
+    test_inputs = test_inputs[:,:,:,::2,:]
+    test_inputs = tf.reshape(test_inputs,[batch_size,height,width,-1])
     test_gt = test_videos_clips_tensor[..., -3:]
 
     print('test inputs = {}'.format(test_inputs))
