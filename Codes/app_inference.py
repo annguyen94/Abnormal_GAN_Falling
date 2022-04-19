@@ -92,6 +92,9 @@ with tf.name_scope('dataset'):
     test_video_clips_tensor = tf.placeholder(shape=[1, height, width, 3 * (num_his + 1)],
                                              dtype=tf.float32)
     test_inputs = test_video_clips_tensor[..., 0:num_his*3]
+    test_inputs = tf.reshape(test_inputs,[1,height,width,num_his,3])
+    test_inputs = test_inputs[:,:,:,::2,:]
+    test_inputs = tf.reshape(test_inputs,[1,height,width,-1])
     test_gt = test_video_clips_tensor[..., -3:]
     print('test inputs = {}'.format(test_inputs))
     print('test prediction gt = {}'.format(test_gt))
@@ -148,7 +151,7 @@ with tf.Session(config=config) as sess:
                                 feed_dict={test_video_clips_tensor: video_clip[np.newaxis, ...]})
                 psnrs[i] = psnr
 
-                print('video = {} / {}, i = {} / {}, psnr = {:.6f}'.format(video_name, num_videos, i, length, psnr))
+                print('video = {} / {}, i = {} / {}'.format(video_name, num_videos, i, length))
 
             psnrs[0:num_his] = psnrs[num_his]
             psnr_records.append(psnrs)
@@ -167,7 +170,7 @@ with tf.Session(config=config) as sess:
         print('total time = {}, fps = {}'.format(used_time, total / used_time))
        
         inp_path = test_folder
-        out_path = 'frames/'
+        out_path = './frames/'
         
         it = 0
         testPredict = np.zeros(scores.shape, dtype=int)
@@ -196,8 +199,9 @@ with tf.Session(config=config) as sess:
                 
                 # Make output video
                 img_path = inp_path + '/' + new_video_name + '/' + frames_list[i]
+                print("new_video_name", new_video_name)
                 print ("img path:", img_path)
-                frame_out = out_path + '{:06}'.format(it) + ".jpg"
+                frame_out = '/content/drive/MyDrive/SaverURFalling2Frame/frames/' + str(i) + '.jpg'
                 print ("frames out:", frame_out)
                 frame = cv2.imread(img_path)
                 H, W = frame.shape[:2]
@@ -212,7 +216,8 @@ with tf.Session(config=config) as sess:
                 if k==1:
                     cv2.rectangle(frame, (0,0), (W, H), (0, 0, 255), thickness=5, lineType=8, shift=0)
                     #frame[l_val!=0] = (0,255,255)
-                    frame = apply_mask(frame, l_val)
+                    # frame = apply_mask(frame, l_val)
+                
                 cv2.imwrite(frame_out, frame)
                 
                 it = it+1
@@ -225,7 +230,7 @@ with tf.Session(config=config) as sess:
             plt.xlabel('Frame')
             plt.ylabel('Score')
             plt.title('Video '+ new_video_name +' Score')
-            fig.savefig('static/plot/'+ new_video_name + '.png')    
+            fig.savefig('./static/plot/'+ new_video_name + '.png')    
             #np.save(save_npy_file, dat)
 
     def label_inference_func(ckpt, dataset_name, evaluate_name):
@@ -262,7 +267,7 @@ with tf.Session(config=config) as sess:
                 truth = truth.reshape(256, 256, 3)
                 truth_list.append(truth)
 
-                print('video = {} / {}, i = {} / {}, psnr = {:.6f}'.format(video_name, num_videos, i, length, psnr))
+                print('video = {} / {}, i = {} / {}'.format(video_name, num_videos, i, length))
                     
                 it += 1
 
@@ -284,7 +289,7 @@ with tf.Session(config=config) as sess:
         #end TODO
        
         inp_path = test_folder
-        out_path = 'frames/'
+        out_path = './frames/'
         
         it = 0
         testPredict = np.zeros(scores.shape, dtype=int)
@@ -307,8 +312,8 @@ with tf.Session(config=config) as sess:
             dat = np.zeros(length)
             
 
-            #frames_list = os.listdir(inp_path + '/' + new_video_name)
-            #frames_list.sort()
+            frames_list = os.listdir(inp_path + '/' + new_video_name)
+            frames_list.sort()
             for i in range(num_his, length):
                 if scores[it] >= thres:
                     k=0
@@ -322,7 +327,7 @@ with tf.Session(config=config) as sess:
                 # Make output video
                 img_path = inp_path + '/' + new_video_name + '/' + frames_list[i]
                 #print ("img path:", img_path)
-                frame_out = out_path + '{:06}'.format(it) + ".jpg"
+                frame_out = "/content/drive/MyDrive/SaverURFalling2Frame/frames/" + str(i) + ".jpg"
                 print ("frames out:", frame_out)
                 frame = cv2.imread(img_path)
                 H, W = frame.shape[:2]
@@ -337,7 +342,7 @@ with tf.Session(config=config) as sess:
                 if k==1:
                     cv2.rectangle(frame, (0,0), (W, H), (0, 0, 255), thickness=5, lineType=8, shift=0)
                     #frame[l_val!=0] = l_val
-                    frame = apply_mask(frame, l_val)
+                    # frame = apply_mask(frame, l_val)
                 cv2.imwrite(frame_out, frame)
                 
                 it = it+1
@@ -351,7 +356,7 @@ with tf.Session(config=config) as sess:
             plt.xlabel('Frame')
             plt.ylabel('Score')
             plt.title('Video '+ new_video_name +' Score')
-            fig.savefig('static/plot/'+ new_video_name + '.png')
+            fig.savefig('./static/plot/'+ new_video_name + '.png')
             #np.save(save_npy_file, dat)
         end_time2 = time.time()
         used_time2 = end_time2 - timestamp2

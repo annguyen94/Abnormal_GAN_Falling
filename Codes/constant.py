@@ -112,6 +112,10 @@ const.LAM_LP = config.getfloat(const.DATASET, 'LAM_LP')
 const.LAM_GDL = config.getfloat(const.DATASET, 'LAM_GDL')
 # the percentage of the different frame loss
 const.LAM_FLOW = config.getfloat(const.DATASET, 'LAM_FLOW')
+# param for difference image
+const.DIF_NUM = config.getint(const.DATASET, 'DIF_NUM')
+const.LAM_DIF = config.getfloat(const.DATASET, 'LAM_DIF')
+
 
 # Learning rate of generator
 const.LRATE_G = eval(config.get(const.DATASET, 'LRATE_G'))
@@ -122,7 +126,7 @@ const.LRATE_D = eval(config.get(const.DATASET, 'LRATE_D'))
 const.LRATE_D_BOUNDARIES = eval(config.get(const.DATASET, 'LRATE_D_BOUNDARIES'))
 
 
-const.SAVE_DIR = 'content/drive/My Drive/Saver UR Falling 2 Frame'
+const.SAVE_DIR = '/content/drive/MyDrive/SaverURFalling2Frame'
 #'{dataset}_l_{L_NUM}_alpha_{ALPHA_NUM}_lp_{LAM_LP}_' \
 #                 'adv_{LAM_ADV}_gdl_{LAM_GDL}_flow_{LAM_FLOW}'.format(dataset=const.DATASET,
 #                                                                      L_NUM=const.L_NUM,
@@ -137,18 +141,18 @@ if args.snapshot_dir:
         const.SNAPSHOT_DIR = args.snapshot_dir
         print(const.SNAPSHOT_DIR)
     else:
-        const.SNAPSHOT_DIR = '/content/drive/My Drive/Saver UR Falling 2 Frame/Checkpoints' #get_dir(os.path.join('checkpoints', const.SAVE_DIR + '_' + args.snapshot_dir))
+        const.SNAPSHOT_DIR = '/content/drive/MyDrive/SaverURFalling2Frame/Checkpoints' #get_dir(os.path.join('checkpoints', const.SAVE_DIR + '_' + args.snapshot_dir))
 else:
-    const.SNAPSHOT_DIR = '/content/drive/My Drive/Saver UR Falling 2 Frame/Checkpoints'#get_dir(os.path.join('checkpoints', const.SAVE_DIR))
+    const.SNAPSHOT_DIR = '/content/drive/MyDrive/SaverURFalling2Frame/Checkpoints'#get_dir(os.path.join('checkpoints', const.SAVE_DIR))
 
 if args.summary_dir:
-    const.SUMMARY_DIR = '/content/drive/My Drive/Saver UR Falling 2 Frame/Summary'#get_dir(os.path.join('summary', const.SAVE_DIR + '_' + args.summary_dir))
+    const.SUMMARY_DIR = '/content/drive/MyDrive/SaverURFalling2Frame/Summary'#get_dir(os.path.join('summary', const.SAVE_DIR + '_' + args.summary_dir))
 else:
-    const.SUMMARY_DIR = '/content/drive/My Drive/Saver UR Falling 2 Frame/Summary'#get_dir(os.path.join('summary', const.SAVE_DIR))
+    const.SUMMARY_DIR = '/content/drive/MyDrive/SaverURFalling2Frame/Summary'#get_dir(os.path.join('summary', const.SAVE_DIR))
 
 if args.psnr_dir:
-    const.PSNR_DIR = '/content/drive/My Drive/Saver UR Falling 2 Frame/PSNR'#get_dir(os.path.join('psnrs', const.SAVE_DIR + '_' + args.psnr_dir))
+    const.PSNR_DIR = '/content/drive/MyDrive/SaverURFalling2Frame/PSNR'#get_dir(os.path.join('psnrs', const.SAVE_DIR + '_' + args.psnr_dir))
 else:
-    const.PSNR_DIR = '/content/drive/My Drive/Saver UR Falling 2 Frame/PSNR'#get_dir(os.path.join('psnrs', const.SAVE_DIR))
+    const.PSNR_DIR = '/content/drive/MyDrive/SaverURFalling2Frame/PSNR'#get_dir(os.path.join('psnrs', const.SAVE_DIR))
 
 
