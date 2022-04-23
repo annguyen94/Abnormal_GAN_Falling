@@ -34,7 +34,7 @@ print("This is const = ", const)
 def image2_bin(img):
     #new_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     new_image = img
-    new_image[new_image<30] = 0
+    new_image[new_image<150] = 0
 
     avg_val = np.mean(new_image[new_image!=0])
     
@@ -61,17 +61,17 @@ def apply_mask(img, mask):
     #mask = mask.flatten()
     
     
-    yellow = np.zeros((h, w, 3), dtype='uint8')
-    yellow[..., 0] = 0
-    yellow[..., 1] = 255
-    yellow[..., 2] = 255
+    color = np.zeros((h, w, 3), dtype='uint8')
+    color[..., 0] = 0
+    color[..., 1] = 0
+    color[..., 2] = 255
 
     mask = cv2.cvtColor(mask,cv2.COLOR_GRAY2RGB)
 
     
     mask = mask/255    
 
-    img = (1-mask) * img + mask * yellow
+    img = (1-mask) * img + mask * color
     #img = mask
 
     '''
@@ -218,14 +218,18 @@ with tf.Session(config=config) as sess:
                 video_clip = data_loader.get_video_clips(video_name, i - num_his, i + 1)
                 l_val = sess.run(loss_val, feed_dict={test_video_clips_tensor: video_clip[np.newaxis, ...]})
                 l_val = np.uint8(l_val)                
-                l_val = l_val.reshape(256, 256, 1)                
+                l_val = l_val.reshape(256, 256, 1)
                 l_val = cv2.resize(l_val, (W,H))
                 l_val = image2_bin(l_val)
                 
                 if k==1:
                     cv2.rectangle(frame, (0,0), (W, H), (0, 0, 255), thickness=5, lineType=8, shift=0)
                     #frame[l_val!=0] = (0,255,255)
-                    # frame = apply_mask(frame, l_val)
+                    frame = apply_mask(frame, l_val)
+                    # contours = cv2.findContours(l_val, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+                    # cv2.drawContours(frame, contours, -1, (0,255,255), 3)
+                    x,y,w,h = cv2.boundingRect(l_val)
+                    image = cv2.rectangle(frame, (x, y), (x + 100, y + 100), (36,255,12), 1)
                 
                 cv2.imwrite(frame_out, frame)
                 
